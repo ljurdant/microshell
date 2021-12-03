@@ -48,6 +48,6 @@ char    **join(char **src, char *str)
     }
     new[i] = str;
     new[i + 1] = NULL;
-    free(str);
+    free(src);
     return (new);
 }

@@ -16,6 +16,8 @@ int main(int ac, char **ag, char **env)
     while (i < ac)
     {
         cmds = NULL;
+		fildes[0] = 0;
+		fildes[1] = 1;
         while (i < ac && strncmp(ag[i], ";\0", 2))
         {
             if (!(cmd = malloc(sizeof(char *))))
@@ -32,7 +34,7 @@ int main(int ac, char **ag, char **env)
             if (i < ac && strncmp(ag[i], ";\0", 2))
                 i++;
         }
-        if ((execute_cmd(cmds, env, fildes)) == -1)
+        if ((execute_cmd(cmds, env, fildes, 0)) == -1)
             return (ft_error(0, NULL));
         if (i < ac)
             i++;

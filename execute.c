@@ -11,12 +11,16 @@ int execute(char **cmd, char **env)
     return (1);
 }
 
-int execute_cmd(t_list *cmds, char **env, int *fildes)
+int execute_cmd(t_list *cmds, char **env, int *fildes, int p)
 {
-    pid_t   pid;
+    pid_t   pid = 0;
+	pid_t	pid_fork;
 
-    if ((pid = fork()) == -1)
-        return (ft_error(0, NULL));
+	if (!p)
+	{
+    	if ((pid = fork()) == -1)
+        	return (ft_error(0, NULL));
+	}
 
     if (pid == 0)
     {
@@ -27,12 +31,26 @@ int execute_cmd(t_list *cmds, char **env, int *fildes)
                 ft_error(0, NULL);
                 exit(1);
             }
-            execute_cmd(cmds->next, env, fildes);
-            execute(cmds->cmd, env);
+			if ((pid_fork = fork()) == -1)
+        		return (ft_error(0, NULL));
+			if (pid_fork == 0)
+			{
+				close(fildes[1]);
+				dup2(0, fildes[0]);
+				execute_cmd(cmds->next, env, fildes, 1);
+			}
+			else
+			{
+				close(fildes[0]);
+				dup2(1, fildes[1]);
+				execute(cmds->cmd, env);
+			}	
+			waitpid(pid_fork, NULL, 0);
         }
         else
-            execute(cmds->cmd, env);
+			execute(cmds->cmd, env);
     }
-    waitpid(pid, NULL, 0);
+	waitpid(pid, NULL, 0);
+	(void)p;
     return (0);
 }

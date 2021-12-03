@@ -18,6 +18,6 @@ t_list  *newlist(char **cmd);
 t_list  *addback(t_list *new, t_list *first);
 char    **join(char **src, char *str);
 void    freelist(t_list *first);
-int execute_cmd(t_list *cmds, char **env, int *fildes);
+int execute_cmd(t_list *cmds, char **env, int *fildes, int p);
 
 #endif
