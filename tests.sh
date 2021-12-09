@@ -45,7 +45,7 @@ pipe_tests() {
 	"|" "/bin/cat" "-e" "|" "/bin/cat" "-e" "|" "/bin/cat" "-e" "|" "/bin/cat" "-e" "|" "/bin/cat" "-e"
 	"|" "/bin/cat" "-e" "|" "/bin/cat" "-e" "|" "/bin/cat" "-e" "|" "/bin/cat" "-e" "|" "/bin/cat" "-e"
 	"|" "/bin/cat" "-e" "|" "/bin/cat" "-e" "|" "/bin/cat" "-e" "|" "/bin/cat" "-e" "|" "/bin/cat" "-e"'
-	./microshell "/bin/ls" "-lRa" "|" "/bin/cat" "-e" "|" "/bin/cat" "-e" "|" "/bin/cat" "-e" "|" "/bin/cat" "-e"\
+	./microshell "/bin/ls" "|" "/bin/cat" "-e" "|" "/bin/cat" "-e" "|" "/bin/cat" "-e" "|" "/bin/cat" "-e"\
 	"|" "/bin/cat" "-e" "|" "/bin/cat" "-e" "|" "/bin/cat" "-e" "|" "/bin/cat" "-e" "|" "/bin/cat" "-e"\
 	"|" "/bin/cat" "-e" "|" "/bin/cat" "-e" "|" "/bin/cat" "-e" "|" "/bin/cat" "-e" "|" "/bin/cat" "-e"\
 	"|" "/bin/cat" "-e" "|" "/bin/cat" "-e" "|" "/bin/cat" "-e" "|" "/bin/cat" "-e" "|" "/bin/cat" "-e"\
@@ -55,7 +55,7 @@ pipe_tests() {
 	"|" "/bin/cat" "-e" "|" "/bin/cat" "-e" "|" "/bin/cat" "-e" "|" "/bin/cat" "-e" "|" "/bin/cat" "-e"\
 	"|" "/bin/cat" "-e" "|" "/bin/cat" "-e" "|" "/bin/cat" "-e" "|" "/bin/cat" "-e" "|" "/bin/cat" "-e"\
 	"|" "/bin/cat" "-e" "|" "/bin/cat" "-e" "|" "/bin/cat" "-e" "|" "/bin/cat" "-e" "|" "/bin/cat" "-e" > my_output
-	test '"/bin/ls" "-lRa" "|" "/bin/cat" "-e" "|" "/bin/cat" "-e" "|" "/bin/cat" "-e" "|" "/bin/cat" "-e"
+	test '"/bin/ls" "|" "/bin/cat" "-e" "|" "/bin/cat" "-e" "|" "/bin/cat" "-e" "|" "/bin/cat" "-e"
 	"|" "/bin/cat" "-e" "|" "/bin/cat" "-e" "|" "/bin/cat" "-e" "|" "/bin/cat" "-e" "|" "/bin/cat" "-e"
 	"|" "/bin/cat" "-e" "|" "/bin/cat" "-e" "|" "/bin/cat" "-e" "|" "/bin/cat" "-e" "|" "/bin/cat" "-e"
 	"|" "/bin/cat" "-e" "|" "/bin/cat" "-e" "|" "/bin/cat" "-e" "|" "/bin/cat" "-e" "|" "/bin/cat" "-e"
@@ -65,7 +65,13 @@ pipe_tests() {
 	"|" "/bin/cat" "-e" "|" "/bin/cat" "-e" "|" "/bin/cat" "-e" "|" "/bin/cat" "-e" "|" "/bin/cat" "-e"
 	"|" "/bin/cat" "-e" "|" "/bin/cat" "-e" "|" "/bin/cat" "-e" "|" "/bin/cat" "-e" "|" "/bin/cat" "-e"
 	"|" "/bin/cat" "-e" "|" "/bin/cat" "-e" "|" "/bin/cat" "-e" "|" "/bin/cat" "-e" "|" "/bin/cat" "-e"'
+	./microshell "/bin/cat" "|" "/bin/echo" "lala" > my_output
 }
+
+semicolon_tests() {
+	
+}
+
 make
 chmod 755 microshell
 pipe_tests
